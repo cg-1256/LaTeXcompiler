@@ -9,4 +9,4 @@ To prevent confusion, place the bash file in the same folder with the .tex and .
 ```
 	sudo chmod +x turnPdf.sh
 	./turnPdf.sh
-'''
+```
