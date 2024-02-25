@@ -1,13 +1,19 @@
 #!/bin/bash
 
+clear
 echo "Please ensure that the .tex and .bib file have the same file name, ignoring the file extension."
 
-echo -n "What is the filename? "
+echo -n -e "\nWhat is the filename? "
 read filename
 
-pdflatex $filename
-biber $filename
-pdflatex $filename
+echo -e "\nCompiling .tex file..."
+pdflatex $filename 1> /dev/null
+
+echo -e "\nCompiling .bib file..."
+biber $filename 1> /dev/null
+
+echo -e "\nCompiling .tex file again..."
+pdflatex $filename 1> /dev/null
 
 
 texName=$filename".tex"
@@ -17,20 +23,13 @@ pdfName=$filename".pdf"
 for file in *; do 
     if [ -f "$file" ]; then 
         if [[ "$file" = "$texName" || "$file" = "$bibName" || "$file" = "$pdfName" || "$file" = "turnPdf.sh" ]]; then
-            echo "Deleting unneeded files..."
+            echo -e "\nDeleting unneeded files..."
         else 
             rm "$file" 
         fi
     fi 
 done
 
-echo "You now have the corresponding PDF"
-
-#if [ $file -ne $texName ]; then
-# delete=true
-# elif $file -ne $bibName;
-# then delete=true
-# elif $file != $pdfName;
-# then delete=true
-# fi
-# if delete == true; then rm $file; fi
+echo -e "\nYou now have the corresponding PDF."
+echo -e "\nHere are the stats for your document:"
+texcount $filename.tex
