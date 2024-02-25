@@ -8,4 +8,5 @@ The assumption has been made that you - the user - have the appropriate LaTeX pa
 To prevent confusion, place the bash file in the same folder with the .tex and .bib files. Then run the following commands to compile the files and obtain the PDF:
 ```
 	sudo chmod +x turnPdf.sh
-	./turnPdf.sh'''
+	./turnPdf.sh
+'''
